@@ -15,11 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = DB::table('posts')
-        // ->join('categories', 'posts.category_id', '=', 'categories.id')
-        // ->select('posts.*', 'categories.name')
-        // ->get();
-        $posts = Post::all();
+        $posts = Post::paginate(4);
         return view('index', compact('posts'));
     }
 

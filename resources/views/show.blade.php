@@ -44,7 +44,7 @@
 
                     <tr>
                         <td class="fw-bold">Category</td>
-                        <td>{{ $post->category_id}}</td>
+                        <td>{{$post->category->name}} </td>
                     </tr>
 
                     <tr>

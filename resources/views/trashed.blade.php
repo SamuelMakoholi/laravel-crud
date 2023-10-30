@@ -39,7 +39,7 @@
                         </td>
                         <td>{{$post->title}} </td>
                         <td>{{$post->description}} </td>
-                        <td>{{$post->category_id}} </td>
+                        <td>{{$post->category->name}} </td>
                         <td>{{date('d-m-Y', strtoTime($post->updated_at))}}</td>
                         <td>
                             <div class="d-flex">

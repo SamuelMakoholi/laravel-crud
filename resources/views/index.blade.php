@@ -39,12 +39,12 @@
                         </td>
                         <td>{{$post->title}} </td>
                         <td>{{$post->description}} </td>
-                        <td>{{$post->category_id}} </td>
+                        <td>{{$post->category->name}} </td>
                         <td>{{date('d-m-Y', strtoTime($post->updated_at))}}</td>
                         <td>
                             <div class="d-flex">
                                 <a class="btn-sm btn-success btn" href="{{ route('posts.show', $post->id)}}">Show</a>
-                                <a class="btn-sm btn-primary btn" href="{{ route('posts.edit', $post->id)}}">Edit</a>
+                                <a class="btn-sm btn-primary btn mx-2" href="{{ route('posts.edit', $post->id)}}">Edit</a>
                                 {{-- <a class="btn-sm btn-danger btn"  href="">Delete</a> --}}
                                 <form action="{{ route('posts.destroy', $post->id)}}" method="POST">
                                     @csrf
@@ -61,6 +61,10 @@
 
                 </tbody>
               </table>
+
+              {{$posts->links()}}
+
+
         </div>
     </div>
 </div>
