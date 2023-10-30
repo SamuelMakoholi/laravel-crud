@@ -6,8 +6,8 @@
     <div class="card">
     <div class="card-header">
        <div class="row">
-        <div class="col-md-6 f-bold">
-            Create Post
+        <div class="col-md-6 fw-bold">
+            Show Post
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
@@ -18,7 +18,44 @@
        </div>
     </div>
         <div class="card-body">
-          {{-- <h5 class="f-bold">Create Form</h5> --}}
+            <table class="table table-striped table-bordered border-dark">
+                <tbody>
+                    <tr>
+                        <td><b>ID</b></td>
+                        <td>{{ $post->id}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold">Image</td>
+                        <td>
+                            <img src="{{asset('storage/'.$post->image)}}" width="80" alt=""/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold">Title</td>
+                        <td>{{ $post->title}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold">Description</td>
+                        <td>{{ $post->description}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold">Category</td>
+                        <td>{{ $post->category_id}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold">Published Date</td>
+                        <td>{{date('d-m-Y', strtoTime($post->updated_at))}}</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
 
         </div>
     </div>

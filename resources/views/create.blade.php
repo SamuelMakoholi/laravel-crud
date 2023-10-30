@@ -13,7 +13,7 @@
     @endif
     <div class="card-header">
        <div class="row">
-        <div class="col-md-6 f-bold">
+        <div class="col-md-6 fw-bold">
             Create Post
         </div>
 

@@ -15,10 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')
-        ->join('categories', 'posts.category_id', '=', 'categories.id')
-        ->select('posts.*', 'categories.name')
-        ->get();
+        // $posts = DB::table('posts')
+        // ->join('categories', 'posts.category_id', '=', 'categories.id')
+        // ->select('posts.*', 'categories.name')
+        // ->get();
+        $posts = Post::all();
         return view('index', compact('posts'));
     }
 
@@ -67,7 +68,9 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
-        return view('show');
+        $post = Post::findOrFail($id);
+
+        return view('show', compact('post'));
     }
 
     /**
@@ -129,5 +132,45 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         //
+        $destroy = Post::findOrFail($id);
+
+        $destroy->delete();
+        return redirect()->route('posts.index');
+    }
+
+
+    //show the trashed resources
+
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+
+        return view('trashed', compact('posts'));
+    }
+
+
+    //restore the trashed resource
+    public function restore($id)
+    {
+
+        $post= Post::onlyTrashed()->findOrFail($id);
+
+        $post->restore();
+
+        return redirect()->route('posts.trashed');
+
+    }
+
+    //force delete
+    public function forceDelete($id)
+    {
+
+        $post= Post::onlyTrashed()->findOrFail($id);
+
+        File::delete(public_path($post->image));
+
+        $post->forceDelete();
+
+        return redirect()->back();
     }
 }

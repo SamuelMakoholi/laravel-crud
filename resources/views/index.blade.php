@@ -6,13 +6,13 @@
     <div class="card">
     <div class="card-header">
        <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 fw-bold">
             All Posts
         </div>
 
         <div class="col-md-6 d-flex justify-content-end">
             <a class="btn btn-success mx-1" href="{{route('posts.create')}}">Create</a>
-            <a class="btn btn-warning mx-1" href="">Trashed</a>
+            <a class="btn btn-warning mx-1" href="{{route('posts.trashed')}}">Trashed</a>
         </div>
 
        </div>
@@ -39,12 +39,21 @@
                         </td>
                         <td>{{$post->title}} </td>
                         <td>{{$post->description}} </td>
-                        <td>{{$post->name}} </td>
+                        <td>{{$post->category_id}} </td>
                         <td>{{date('d-m-Y', strtoTime($post->updated_at))}}</td>
                         <td>
-                            <a class="btn-sm btn-success btn" href="">Show</a>
-                            <a class="btn-sm btn-primary btn" href="{{ route('posts.edit', $post->id)}}">Edit</a>
-                            <a class="btn-sm btn-danger btn"  href="">Delete</a>
+                            <div class="d-flex">
+                                <a class="btn-sm btn-success btn" href="{{ route('posts.show', $post->id)}}">Show</a>
+                                <a class="btn-sm btn-primary btn" href="{{ route('posts.edit', $post->id)}}">Edit</a>
+                                {{-- <a class="btn-sm btn-danger btn"  href="">Delete</a> --}}
+                                <form action="{{ route('posts.destroy', $post->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn-sm btn-danger btn">Delete</button>
+
+                                </form>
+                            </div>
                         </td>
                       </tr>
                     @endforeach
